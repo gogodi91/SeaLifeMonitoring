@@ -48,3 +48,33 @@ class Cruise(models.Model):
 class Notes(models.Model):
 	Value = models.TextField()
 	
+"""/*------------------------
+	Stations
+--------------------------*/"""
+class Stations(models.Model):
+	Notes_ID = models.ForeignKey(Cruise, on_delete = models.CASCADE)
+	Station_Type = models.CharField(max_length=10)
+	Station_Code = models.CharField(max_length=20)
+	Station_Name_BG = models.CharField(max_length=32)
+	Station_Name_LAT = models.CharField(max_length=32)
+	Station_Depth = models.FloatField()
+	Latitude	= models.CharField(max_length=9)
+	Longitude = models.CharField(max_length=9)
+	Substrat	= models.CharField(max_length=20)
+	
+	def __unicode__(self):
+		return self.Station_Type
+	def __unicode__(self):
+		return self.Station_Code
+	def __unicode__(self):
+		return self.Station_Name_BG
+	def __unicode__(self):
+		return self.Station_Name_LAT
+	def __unicode__(self):
+		return self.Latitude
+	def __unicode__(self):
+		return self.Longitude
+	def __unicode__(self):
+		return self.Substrat
+
+
