@@ -8,6 +8,16 @@
     <body>
         <h1>Welcome! But this site is still under construction...</h1>
         So here`s a picture <strong>{{ boldmessage }}</strong><br />
+        {% if events %}
+            <ul>
+                {% for category in events %}
+                <li>{{ category.Institute_Code }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+        
         <a href="/Monitoring/about/">About</a><br />
         <img src="{% static "Puffer_Fish_DSC01257.JPG" %}" alt= "Picture of a Fish"/>
     </body>

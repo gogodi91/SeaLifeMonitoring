@@ -12,9 +12,6 @@ class Area(models.Model):
 	Start_Date_Time = models.DateTimeField()
 	End_Date_Time = models.DateTimeField()
 	
-	def __unicode__(self):
-		return self.Start_Latitude
-
 """/*------------------------
 			Vessel
 --------------------------*/"""
@@ -52,22 +49,22 @@ class Notes(models.Model):
 	Stations
 --------------------------*/"""
 class Stations(models.Model):
-	Notes_ID = models.ForeignKey(Cruise, on_delete = models.CASCADE)
+	Notes_ID = models.ForeignKey(Notes, on_delete = models.CASCADE)
 	Station_Type = models.CharField(max_length=10)
 	Station_Code = models.CharField(max_length=20)
-	Station_Name_BG = models.CharField(max_length=32)
+	"""Station_Name_BG = models.CharField(max_length=32)"""
 	Station_Name_LAT = models.CharField(max_length=32)
 	Station_Depth = models.FloatField()
-	Latitude	= models.CharField(max_length=9)
-	Longitude = models.CharField(max_length=9)
+	Latitude	= models.IntegerField()
+	Longitude = models.IntegerField()
 	Substrat	= models.CharField(max_length=20)
 	
 	def __unicode__(self):
 		return self.Station_Type
 	def __unicode__(self):
 		return self.Station_Code
-	def __unicode__(self):
-		return self.Station_Name_BG
+	"""def __unicode__(self):
+		return self.Station_Name_BG"""
 	def __unicode__(self):
 		return self.Station_Name_LAT
 	def __unicode__(self):
@@ -177,7 +174,7 @@ class Event(models.Model):
 	Gear_Equipment = models.CharField(max_length=20)
 	Sample_type = models.CharField(max_length=8)
 	Date_Local_Time = models.DateField()
-	Date_UTC = models.DateField()
+	Date_UTC = models.DateTimeField()
 	Start_Depth	= models.FloatField()
 	End_Depth = models.FloatField()
 	Operator	 = models.CharField(max_length=32)

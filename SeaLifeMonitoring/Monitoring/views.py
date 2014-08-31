@@ -2,16 +2,23 @@
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
+from Monitoring.models import Event
 
 def index(request):
 	# Request the context of the request.
 	# The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
-
+	 
+	 # Query the database for a list of ALL categories currently stored.
+    # Order the categories by no. likes in descending order.
+    # Retrieve the top 5 only - or all if less than 5.
+    # Place the list in our context_dict dictionary which will be passed to the template engine.
+    events_list = Event.objects.order_by('-id')[:5]
+    context_dict = {'events': events_list}
+        
     # Construct a dictionary to pass to the template engine as its context.
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-    context_dict = {'boldmessage': "OF A HUGE FISH"}
+    """context_dict = {'boldmessage': "OF A HUGE FISH"}"""
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
