@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from Monitoring.models import Event
+from Monitoring.forms import AreaForm
 
 def index(request):
 	# Request the context of the request.
@@ -24,3 +25,36 @@ def index(request):
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
     return render_to_response('Monitoring/index.html', context_dict, context)
+
+def about(request):
+	context = RequestContext(request)
+	context_dict = {'boldmessage': "OF A HUGE FISH"}
+	return render_to_response('Monitoring/about.html', context_dict, context)
+
+def add_area(request):
+    # Get the context from the request.
+    context = RequestContext(request)
+
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = AreaForm(request.POST)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+
+            # Now call the index() view.
+            # The user will be shown the homepage.
+            return index(request)
+        else:
+            # The supplied form contained errors - just print them to the terminal.
+            print form.errors
+    else:
+        # If the request was not a POST, display the form to enter details.
+        form = AreaForm()
+
+    # Bad form (or form details), no form supplied...
+    # Render the form with error messages (if any).
+    return render_to_response('Monitoring/add_area.html', {'form': form}, context)
+

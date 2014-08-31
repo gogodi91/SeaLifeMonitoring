@@ -1,6 +1,11 @@
 from django.db import models
 
 # Create your models here.
+
+
+# Probably a good idea to split the coordinates fields (latitudes and longitudes)
+# into several fields holding degrees, minutes and seconds
+
 """/*------------------------
 			Area
 --------------------------*/"""

@@ -5,9 +5,12 @@
         <title>SeaLifeMonitoring</title>
     </head>
 
-    <body>
-        <h1>Welcome! But this site is still under construction...</h1>
-        So here`s a picture <strong>{{ boldmessage }}</strong><br />
+	<body>
+    	  <h1 align=center>Welcome to <br/>
+				<strong>Sea Life Monitoring<strong><br/>
+				The comprehensive Black Sea sea life monitoring app<br/>
+        </h1>
+        <h2>last 5 events:</h2>
         {% if events %}
             <ul>
                 {% for category in events %}
@@ -17,9 +20,8 @@
         {% else %}
             <strong>There are no categories present.</strong>
         {% endif %}
-        
+        <a href="/Monitoring/add_area/">Add a New Area</a>
         <a href="/Monitoring/about/">About</a><br />
-        <img src="{% static "Puffer_Fish_DSC01257.JPG" %}" alt= "Picture of a Fish"/>
-    </body>
+	</body>
 
 </html>
