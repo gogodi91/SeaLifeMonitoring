@@ -15,8 +15,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^Monitoring/', include('Monitoring.urls')), #new tuple
-    url(r'', include('Monitoring.urls')),
+    url(r'^monitoring/', include('monitoring.urls')), #new tuple
+    url(r'', include('monitoring.urls')),
 )
 
 if settings.DEBUG:
