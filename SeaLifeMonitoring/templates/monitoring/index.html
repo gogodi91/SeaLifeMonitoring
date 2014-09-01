@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-{% load static %} <!--New Line-->
-<html>
-    <head>
-        <title>SeaLifeMonitoring</title>
-    </head>
+{% extends 'monitoring/base.html' %}
 
-	<body>
-    	  <h1 align=center>Welcome to <br/>
+{% block title %}{{ 'index' }}{% endblock %}
+
+{% block body_block %}
+	  	  <h1 align=center>Welcome to <br/>
 				<strong>Sea Life Monitoring<strong><br/>
 				The comprehensive Black Sea sea life monitoring app<br/>
         </h1>
 			{% if user.is_authenticated %}
 			<h1>Rango says... hello {{ user.username }}!</h1>
-			<a href="/monitoring/logout/">Logout</a>
 			{% else %}
 			<h1>Rango says... hello world!</h1>
-			<a href="/monitoring/login/">Login</a>
 			{% endif %}
         <h2>Last 5 events and the institutes supporting them:</h2>
         {% if events %}
@@ -29,8 +24,4 @@
         {% endif %}
         <br/><a href="/monitoring/add_area/">Add a New Area</a>
         
-        <br/><a href="/monitoring/register/">Register Here</a>
-        <br/><a href="/monitoring/about/">About</a>
-	</body>
-
-</html>
+{% endblock %}

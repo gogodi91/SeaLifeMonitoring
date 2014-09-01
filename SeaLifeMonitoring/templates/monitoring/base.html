@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %} <!--New Line-->
+<html>
+    <head>
+        <title>SeaLifeMonitoring - {% block title %}Tango with Django!{% endblock %}</title>
+    </head>
+
+	<body>
+        <div>
+            <ul>
+            {% if user.is_authenticated %}
+            	 <li><a href="/monitoring/">Home</a></li>
+                <li><a href="/monitoring/logout/">Logout</a></li>
+                <li><a href="/monitoring/add_area/">Add a New Record</a></li>
+                <li><a href="/monitoring/add_area/">Query Records</a></li>
+            {% else %}
+            	 <li><a href="/monitoring/">Home</a></li>
+                <li><a href="/monitoring/login/">Login</a></li>
+                <li><a href="/monitoring/register/">Register Here</a></li>
+                <li><a href="/monitoring/add_area/">Query Records</a></li>
+            {% endif %}
+
+                <li><a href="/monitoring/about/">About</a></li>
+            </ul>
+        </div>
+        <hr />
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+        
+	</body>
+</html>

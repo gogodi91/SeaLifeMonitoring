@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>SeaLifeMonitoring</title>
-    </head>
+{% extends 'monitoring/base.html' %}
+{% block title %}{{ 'register' }}{% endblock %}
 
-    <body>
+{% block body_block %}
         <h1>Register with SeaLifeMonitoring</h1>
 
         {% if registered %}
@@ -28,6 +25,4 @@
             <input type="submit" name="submit" value="Register" />
         </form>
         {% endif %}
-        <br/><a href="/monitoring/">Home</a>
-    </body>
-</html>
+{% endblock %}

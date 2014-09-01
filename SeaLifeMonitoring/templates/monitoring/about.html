@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-{% load static %} <!--New Line-->
-<html>
-    <head>
-        <title>SeaLifeMonitoring</title>
-    </head>
+{% extends 'monitoring/base.html' %}
 
-    <body>
-        <h1>This site is still under construction</h1>
-        <h3>So here`s a picture</h3> <h2><strong>{{ boldmessage }}</strong></h2>
-        <a href="/monitoring">Home</a><br />
-        <img src="{% static "Puffer_Fish_DSC01257.JPG" %}" alt= "Picture of a Fish"/>
-    </body>
+{% block title %}{{ 'about' }}{% endblock %}
+
+{% block body_block %}
+	<h1>This site is still under construction</h1>
+	<h3>So here`s a picture</h3> <h2><strong>{{ boldmessage }}</strong></h2>
+	<img src="/static/Puffer_Fish_DSC01257.JPG" alt= "Picture of a Fish"/>
+	
+{% endblock %}
+	

@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>SeaLifeMonitoring</title>
-    </head>
+{% extends 'monitoring/base.html' %}
+{% block title %}{{ 'login' }}{% endblock %}
 
-    <body>
+{% block body_block %}
         <h1>Login to SeaLifeMonitoring</h1>
 
         <form id="login_form" method="post" action="/monitoring/login/">
@@ -17,6 +13,4 @@
 
             <input type="submit" value="submit" />
         </form>
-	 <br/><a href="/monitoring/">Home</a>
-    </body>
-</html>
+{% endblock %}

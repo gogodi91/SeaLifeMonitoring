@@ -5,11 +5,14 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from monitoring.models import Event
+from monitoring.models import Event, Vessel, Cruise, Notes, Stations, TypeSpec, TAXA, ChemParam, Event, Chemistry, DataAB, SizeAgeFish, Age, Size
 from monitoring.forms import AreaForm
 from monitoring.forms import UserForm, UserProfileForm
 
+
+
 ####################  INDEX  ####################
+
 def index(request):
 	# Request the context of the request.
 	# The context contains information such as the client's machine details, for example.
@@ -31,13 +34,17 @@ def index(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('monitoring/index.html', context_dict, context)
 
+
 ####################  ABOUT  ####################
+
 def about(request):
 	context = RequestContext(request)
 	context_dict = {'boldmessage': "OF A HUGE FISH"}
 	return render_to_response('monitoring/about.html', context_dict, context)
 
+
 ####################  ADD_AREA  ####################
+
 @login_required #requires user to be logged in to see this page
 def add_area(request):
     # Get the context from the request.
@@ -66,7 +73,9 @@ def add_area(request):
     # Render the form with error messages (if any).
     return render_to_response('monitoring/add_area.html', {'form': form}, context)
 
+
 ####################  REGISTER  ####################
+
 def register(request):
 	# Like before, get the request's context.
 	context = RequestContext(request)
@@ -125,8 +134,10 @@ def register(request):
 			'monitoring/register.html',
 			{'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
 			context)
+
 			
 ####################  LOGIN  ####################
+
 def user_login(request):
     # Like before, obtain the context for the user's request.
     context = RequestContext(request)
@@ -167,7 +178,9 @@ def user_login(request):
         # blank dictionary object...
         return render_to_response('monitoring/login.html', {}, context)
 
+
 ####################  LOGOUT  ####################
+
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
 def user_logout(request):
@@ -176,3 +189,12 @@ def user_logout(request):
 
     # Take the user back to the homepage.
     return HttpResponseRedirect('/monitoring/')
+
+
+####################  ADD RECORDS  ####################
+
+
+
+
+
+####################  QUERY RECORDS  ####################

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>SeaLifeMonitoring</title>
-    </head>
+{% extends 'monitoring/base.html' %}
 
-    <body>
+{% block title %}{{ 'add area' }}{% endblock %}
+
+{% block body_block %}
         <h1>Add an Area</h1>
 
         <form id="area_form" method="post" action="/monitoring/add_area/">
@@ -23,7 +21,4 @@
 				<br/>
             <input type="submit" name="submit" value="Create Area" />
         </form>
-        <br/><a href="/monitoring">Home</a>
-    </body>
-
-</html>
+{% endblock %}
