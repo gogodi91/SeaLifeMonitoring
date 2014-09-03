@@ -1,32 +1,75 @@
 <!DOCTYPE html>
 {% load static %} <!--New Line-->
 <html>
-    <head>
-        <title>SeaLifeMonitoring - {% block title %}Tango with Django!{% endblock %}</title>
-    </head>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap -->
+	<link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	<link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+	<title>SeaLifeMonitoring - {% block title %}Tango with Django!{% endblock %}</title>
+	
+	</head>
 
 	<body>
-        <div>
-            <ul>
-            {% if user.is_authenticated %}
-            	 <li><a href="/monitoring/">Home</a></li>
-                <li><a href="/monitoring/logout/">Logout</a></li>
-                <li><a href="/monitoring/add_area/">Add a New Record</a></li>
-                <li><a href="/monitoring/add_area/">Query Records</a></li>
-            {% else %}
-            	 <li><a href="/monitoring/">Home</a></li>
-                <li><a href="/monitoring/login/">Login</a></li>
-                <li><a href="/monitoring/register/">Register Here</a></li>
-                <li><a href="/monitoring/add_area/">Query Records</a></li>
-            {% endif %}
-
-                <li><a href="/monitoring/about/">About</a></li>
-            </ul>
-        </div>
-        <hr />
-        <div>
-            {% block body_block %}{% endblock %}
-        </div>
-        
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="/monitoring/">SeaLifeMonitoring</a>
+		
+					<div class="nav-collapse collapse">
+						<ul class="nav pull-right">
+							{% if user.is_authenticated %}
+								<li class="navbar-text">Welcome, {{ user.username }}!</li>
+								<li><a href="/monitoring/logout/">Logout</a></li>
+								<li><a href="/monitoring/add_info/">Add a New Record</a></li>
+								<li><a href="/monitoring/get_info/">Query Records</a></li>
+							{% else %}
+								<li><a href="/monitoring/login/">Login</a></li>
+								<li><a href="/monitoring/register/">Register Here</a></li>
+								<li><a href="/monitoring/get_info/">Query Records</a></li>
+							{% endif %}
+							</ul>
+						<ul class="nav">
+							<li><a href="/monitoring/">Home</a></li>
+							<li><a href="/monitoring/about/">About</a></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span3">
+					<div class="well sidebar-nav">
+					<!--- Empty for the timebeing -->
+					</div>
+					<!--/.well -->
+				</div>
+				<!--/span-->
+				<div class="span9">
+					{% block body_block %}
+					{% endblock %}
+				</div>
+				<!--/span-->
+			</div>
+			<!--/row-->
+		</div>
+		<!--/.fluid-container-->
+		<hr>
+		
+		<footer>
+			<div class="container">
+				<p>&copy; SeaLifeMonitoring by Georgi Dimitrov</p>
+			</div>
+		</footer>
+		<script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
 	</body>
 </html>

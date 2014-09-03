@@ -1,11 +1,12 @@
 # Create your views here.
+from datetime import datetime
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from monitoring.models import Event, Vessel, Cruise, Notes, Stations, TypeSpec, TAXA, ChemParam, Event, Chemistry, DataAB, SizeAgeFish, Age, Size
+from monitoring.models import Area, Vessel, Cruise, Notes, Stations, TypeSpec, TAXA, ChemParam, Event, Chemistry, DataAB, SizeAgeFish, Age, Size
 from monitoring.forms import AreaForm
 from monitoring.forms import UserForm, UserProfileForm
 
@@ -17,8 +18,9 @@ def index(request):
 	# Request the context of the request.
 	# The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
+    
 	 
-	 # Query the database for a list of ALL categories currently stored.
+	# Query the database for a list of ALL categories currently stored.
     # Order the categories by no. likes in descending order.
     # Retrieve the top 5 only - or all if less than 5.
     # Place the list in our context_dict dictionary which will be passed to the template engine.
@@ -32,16 +34,42 @@ def index(request):
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
     # Note that the first parameter is the template we wish to use.
-    return render_to_response('monitoring/index.html', context_dict, context)
+    
+	#### CODE FOR VISITS COUNTER WITH COOKIES ####
+    if request.session.get('last_visit'):
+        # The session has a value for the last visit
+        last_visit_time = request.session.get('last_visit')
+        visits = request.session.get('visits', 0)
 
+        if (datetime.now() - datetime.strptime(last_visit_time[:-7], "%Y-%m-%d %H:%M:%S")).days > 0:
+            request.session['visits'] = visits + 1
+            request.session['last_visit'] = str(datetime.now())
+    else:
+        # The get returns None, and the session does not have a value for the last visit.
+        request.session['last_visit'] = str(datetime.now())
+        request.session['visits'] = 1
+    #### END  CODE ####
+    
+    return render_to_response('monitoring/index.html', context_dict, context)
+    
 
 ####################  ABOUT  ####################
 
 def about(request):
 	context = RequestContext(request)
-	context_dict = {'boldmessage': "OF A HUGE FISH"}
-	return render_to_response('monitoring/about.html', context_dict, context)
-
+	
+	
+	# If the visits session varible exists, take it and use it.
+    # If it doesn't, we haven't visited the site so set the count to zero.
+	if request.session.get('visits'):
+		count = request.session.get('visits')
+		print '>>>> HITS COUNT {}'.format(count)
+	else:
+		count = 0
+		print '>>>> HITS COUNT hihi {}'.format(count)
+    # remember to include the visit data
+	return render_to_response('monitoring/about.html', {'visits': count}, context)
+	
 
 ####################  ADD_AREA  ####################
 
@@ -79,7 +107,11 @@ def add_area(request):
 def register(request):
 	# Like before, get the request's context.
 	context = RequestContext(request)
-
+	
+	#if request.session.test_cookie_worked():
+	#	print ">>>> TEST COOKIE WORKED!"
+	#	request.session.delete_test_cookie()
+	
 	# A boolean value for telling the template whether the registration was successful.
 	# Set to False initially. Code changes value to True when registration succeeds.
 	registered = False
@@ -191,10 +223,22 @@ def user_logout(request):
     return HttpResponseRedirect('/monitoring/')
 
 
-####################  ADD RECORDS  ####################
+####################  ADD INFO  ####################
 
+@login_required
+def add_info(request):
+	context = RequestContext(request)
+	#<!-->needs to be reworked to use dinamic data (dictionary)</-->
+	#table_dict = {'table_name': table_name}
+	return render_to_response('monitoring/add_info.html', context)
+	
 
+####################  GET INFO  ####################
 
+def get_info(request):
+	context = RequestContext(request)
+	#<!-->needs to be reworked to use dinamic data (dictionary)</-->
+	#table_dict = {'table_name': table_name}
+	return render_to_response('monitoring/get_info.html', context)
 
-
-####################  QUERY RECORDS  ####################
+####################  ADD INFO RECORDS  ####################

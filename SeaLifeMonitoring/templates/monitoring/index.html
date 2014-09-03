@@ -3,15 +3,19 @@
 {% block title %}{{ 'index' }}{% endblock %}
 
 {% block body_block %}
+<div class="hero-unit">
 	  	  <h1 align=center>Welcome to <br/>
-				<strong>Sea Life Monitoring<strong><br/>
+				<strong>SeaLifeMonitoring<strong><br/>
 				The comprehensive Black Sea sea life monitoring app<br/>
         </h1>
-			{% if user.is_authenticated %}
+			<!--{% if user.is_authenticated %}
 			<h1>Rango says... hello {{ user.username }}!</h1>
 			{% else %}
 			<h1>Rango says... hello world!</h1>
-			{% endif %}
+			{% endif %}    this was used to test login capability (legacy)-->
+</div>
+<div class="row-fluid">
+    <div class="span6">   
         <h2>Last 5 events and the institutes supporting them:</h2>
         {% if events %}
             <ul>
@@ -22,6 +26,10 @@
         {% else %}
             <strong>There are no categories present.</strong>
         {% endif %}
+    </div>
+    
+    <div class="span6">   
         <br/><a href="/monitoring/add_area/">Add a New Area</a>
-        
+	</div>
+</div>
 {% endblock %}
