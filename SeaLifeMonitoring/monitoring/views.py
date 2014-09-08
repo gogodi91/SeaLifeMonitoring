@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from monitoring.models import Area, Vessel, Cruise, Notes, Stations, TypeSpec, TAXA, ChemParam, Event, Chemistry, DataAB, SizeAgeFish, Age, Size
-from monitoring.forms import AreaForm
+from monitoring.forms import AreaForm, VesselForm, CruiseForm, NotesForm, StationsForm, TypeSpecForm, TAXAForm, ChemParamForm, EventForm, ChemistryForm, DataABForm, SizeAgeFishForm, AgeForm, SizeForm
 from monitoring.forms import UserForm, UserProfileForm
 
 
@@ -99,8 +99,255 @@ def add_area(request):
 
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
-    return render_to_response('monitoring/add_area.html', {'form': form}, context)
+    return render_to_response('monitoring/records/add_area.html', {'form': form}, context)
 
+
+####################  ADD_VESSEL  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_vessel(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = VesselForm()
+    return render_to_response('monitoring/records/add_vessel.html', {'form': form}, context)
+
+
+####################  ADD_CRUISE  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_cruise(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = CruiseForm()
+    return render_to_response('monitoring/records/add_cruise.html', {'form': form}, context)    
+
+
+####################  ADD_NOTE  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_note(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = NotesForm()
+    return render_to_response('monitoring/records/add_note.html', {'form': form}, context)
+
+
+####################  ADD_STATION  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_station(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = StationsForm()
+    return render_to_response('monitoring/records/add_station.html', {'form': form}, context)
+
+
+####################  ADD_TYPESPEC  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_typespec(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = TypeSpecForm()
+    return render_to_response('monitoring/records/add_typespec.html', {'form': form}, context)
+
+
+####################  ADD_TAXA  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_taxa(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = TAXAForm()
+    return render_to_response('monitoring/records/add_taxa.html', {'form': form}, context)
+
+
+####################  ADD_CHEMPARAM  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_chemparam(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = ChemParamForm()
+    return render_to_response('monitoring/records/add_chemparam.html', {'form': form}, context)
+
+
+####################  ADD_EVENT  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_event(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = EventForm()
+    return render_to_response('monitoring/records/add_event.html', {'form': form}, context)
+
+
+####################  ADD_CHEMISTRY  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_chemistry(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = ChemistryForm()
+    return render_to_response('monitoring/records/add_chemistry.html', {'form': form}, context)
+
+
+####################  ADD_DATAAB  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_dataab(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = DataABForm()
+    return render_to_response('monitoring/records/add_dataab.html', {'form': form}, context)
+
+
+####################  ADD_SIZEAGEFISH  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_sizeagefish(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = SizeAgeFishForm()
+    return render_to_response('monitoring/records/add_sizeagefish.html', {'form': form}, context)
+
+
+####################  ADD_AGE  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_age(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = AgeForm()
+    return render_to_response('monitoring/records/add_age.html', {'form': form}, context)
+
+
+####################  ADD_SIZE  ####################
+
+@login_required #requires user to be logged in to see this page
+def add_size(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        form = VesselForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return index(request)
+        else:
+            print form.errors
+    else:
+        form = SizeForm()
+    return render_to_response('monitoring/records/add_size.html', {'form': form}, context)
+    
 
 ####################  REGISTER  ####################
 
