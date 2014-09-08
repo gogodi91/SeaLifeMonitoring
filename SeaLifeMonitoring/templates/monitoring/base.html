@@ -58,9 +58,11 @@
 						
 						<ul class="nav nav-list">
 							<li class="nav-header">Find a Category</li>
-							<form>
+							<form id="search_form" method="get" action="/monitoring/results/">
 								<label></label>
-								<li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>
+								<li><input  class="search-query span10" type="text" name="results" value="" id="suggestion" /></li>
+								</br>
+								<button class="btn btn-primary" type="submit">Search</button>
 								<!--- Needs a button to transfer to the found page -->
 							</form>
 						</ul>

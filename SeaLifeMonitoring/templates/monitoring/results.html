@@ -1,0 +1,136 @@
+{% extends 'monitoring/base.html' %}
+
+{% block title %}{{ 'results' }}{% endblock %}
+
+{% block body_block %}
+<div class="hero-unit">
+	<h1>Results For {{ category }}</h1>
+	<br/>
+	{% if exception == "No record found" %}
+		<h2>No record found</h2>
+	{% endif %}
+	<div class="container">
+		<hr style="width:90px">
+		{% if exception != "No record found" %}
+		<!--####################   AREA   ####################-->
+		{% if AreaIsEmpty == False %}
+		<h3>Area</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   VESSEL   ####################-->
+		{% if VesselIsEmpty == False %}
+		<h3>Vessel</h3>
+		
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   CRUISE   ####################-->
+		{% if CruiseIsEmpty == False %}
+		<h3>Cruise</h3>
+		
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   NOTES   ####################-->
+		{% if NotesIsEmpty == False %}
+		<h3>Notes</h3>
+		
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   STATIONS   ####################-->
+		{% if StationsIsEmpty == False %}
+		<h3>Stations</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   TYPESPEC   ####################-->
+		{% if TypeSpecIsEmpty == False %}
+			<h3>TypeSpec</h3>
+			<p><strong>Type</strong> - {{ TypeSpec.Type }}</p>
+			<p><strong>BSID</strong> - {{ TypeSpec.BSID }}</p>
+			<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   TAXA   ####################-->
+		{% if TAXAIsEmpty == False %}
+		<h3>TAXA</h3>
+			<p><strong>Type_Spec_ID</strong> - {{ TAXA.Type_Spec_ID }}</p>
+			<p><strong>URL</strong> - {{ TAXA.URL }}</p>
+			<p><strong>Scientific_Name</strong> - {{ TAXA.Scientific_Name }}</p>
+			<p><strong>Authority</strong> - {{ TAXA.Authority }}</p>
+			<p><strong>Rank</strong> - {{ TAXA.Rank }}</p>
+			<p><strong>Status</strong> - {{ TAXA.Status }}</p>
+			<p><strong>Unaccept_Reason</strong> - {{ TAXA.Unaccept_Reason }}</p>
+			<p><strong>Valid_APHIA_ID</strong> - {{ TAXA.Valid_APHIA_ID }}</p>
+			<p><strong>Valid_Name</strong> - {{ TAXA.Valid_Name }}</p>
+			<p><strong>Valid_Authority</strong> - {{ TAXA.Valid_Authority }}</p>
+			<p><strong>Kingdom</strong> - {{ TAXA.Kingdom }}</p>
+			<p><strong>Phylum</strong> - {{ TAXA.Phylum }}</p>
+			<p><strong>Class</strong> - {{ TAXA.Class }}</p>
+			<p><strong>Order</strong> - {{ TAXA.Order }}</p>
+			<p><strong>Family</strong> - {{ TAXA.Family }}</p>
+			<p><strong>Genus</strong> - {{ TAXA.Genus }}</p>
+			<p><strong>Citation</strong> - {{ TAXA.Citation }}</p>
+			<p><strong>LSID</strong> - {{ TAXA.LSID }}</p>
+			<p><strong>Is_Marine</strong> - {{ TAXA.Is_Marine }}</p>
+			<p><strong>Is_Brackish</strong> - {{ TAXA.Is_Brackish }}</p>
+			<p><strong>Is_Freshwater</strong> -  {{ TAXA.Is_Freshwater }}</p>
+			<p><strong>Is_Terestrial</strong> - {{ TAXA.Is_Terestrial }}</p>
+			<p><strong>Is_Extinct</strong> - {{ TAXA.Is_Extinct }}</p>
+			<p><strong>Match_Type</strong> - {{ TAXA.Match_Type }}</p>
+			<p><strong>Modified</strong> - {{ TAXA.Modified }}</p>
+			<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   CHEMPARAM   ####################-->
+		{% if ChemParamIsEmpty == False %}
+		<h3>ChemParam</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   EVENT   ####################-->
+		{% if EventIsEmpty == False %}
+		<h3>Event</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   CHEMISTRY   ####################-->
+		{% if ChemistryIsEmpty == False %}
+		<h3>Chemistry</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   DATAAB   ####################-->
+		{% if DataABIsEmpty == False %}
+		<h3>DataAB</h3>
+		<hr style="width:90px">
+		{% endif %}
+		
+		<!--####################   SIZEAGEFISH   ####################-->
+		{% if SizeAgeFishIsEmpty == False %}
+		<h3>SizeAgeFish</h3>
+		<hr style="width:90px">
+		
+		{% endif %}
+		
+		<!--####################   AGE   ####################-->
+		{% if AgeIsEmpty == False %}
+		<h3>Age</h3>
+		<hr style="width:90px">
+		
+		{% endif %}
+		
+		<!--####################   SIZE   ####################-->
+		{% if SizeIsEmpty == False %}
+		<h3>Size</h3>
+		<hr style="width:90px">
+		{% endif %}
+	{% endif %}
+	
+	</div>
+</div>
+{% endblock %}
+
+

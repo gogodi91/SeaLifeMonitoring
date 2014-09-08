@@ -23,5 +23,6 @@ urlpatterns = patterns('',
 	url(r'^logout/$', views.user_logout, name='logout'),
 	url(r'^add_info/$', views.add_info, name='add_info'),
 	url(r'^get_info/$', views.get_info, name='get_info'),
+	url(r'^results/$', views.results, name='results'),
 	)
 

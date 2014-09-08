@@ -128,7 +128,7 @@ def add_cruise(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = CruiseForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -147,7 +147,7 @@ def add_note(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = NotesForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -166,7 +166,7 @@ def add_station(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = StationsForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -185,7 +185,7 @@ def add_typespec(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = TypeSpecForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -204,7 +204,7 @@ def add_taxa(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = TAXAForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -223,7 +223,7 @@ def add_chemparam(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = ChemParamForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -242,7 +242,7 @@ def add_event(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = EventForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -261,7 +261,7 @@ def add_chemistry(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = ChemistryForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -280,7 +280,7 @@ def add_dataab(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = DataABForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -299,7 +299,7 @@ def add_sizeagefish(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = SizeAgeFishForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -318,7 +318,7 @@ def add_age(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = AgeForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -337,7 +337,7 @@ def add_size(request):
     context = RequestContext(request)
 
     if request.method == 'POST':
-        form = VesselForm(request.POST)
+        form = SizeForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
@@ -488,4 +488,30 @@ def get_info(request):
 	#table_dict = {'table_name': table_name}
 	return render_to_response('monitoring/get_info.html', context)
 
-####################  ADD INFO RECORDS  ####################
+####################  RESULTS  ####################
+
+# Use "Raja clavata" or "Sprattus sprattus" for testing purposes 
+def results(request):
+	context = RequestContext(request)
+	
+	# Take whatever was written in FIND A CATEGORY field and save it for later use
+	if request.method == 'GET':
+		category = request.GET.get('results')
+		print "CAT IS " + category
+	
+	# Dictionary that contains the search word and all relevant tables
+	mydict = {'category': category}
+	if TAXA.objects.exists():
+		try:
+			taxa = TAXA.objects.get(Scientific_Name__iexact = category)
+			print taxa.Scientific_Name
+			mydict['TAXA'] = taxa
+			mydict['TAXAIsEmpty'] = False
+			typespec = TypeSpec.objects.get(taxa__Scientific_Name__iexact = category)
+			mydict['TypeSpec'] = typespec
+			mydict['TypeSpecIsEmpty'] = False
+		except:
+			mydict['exception'] = "No record found"
+			
+	return render_to_response('monitoring/results.html', mydict, context)
+
