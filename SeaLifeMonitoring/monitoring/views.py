@@ -497,14 +497,14 @@ def results(request):
 	# Take whatever was written in FIND A CATEGORY field and save it for later use
 	if request.method == 'GET':
 		category = request.GET.get('results')
-		print "CAT IS " + category
+		print ">>>>CAT IS " + category
 	
 	# Dictionary that contains the search word and all relevant tables
 	mydict = {'category': category}
 	if TAXA.objects.exists():
 		try:
 			taxa = TAXA.objects.get(Scientific_Name__iexact = category)
-			print taxa.Scientific_Name
+			print ">>>>" + taxa.Scientific_Name
 			mydict['TAXA'] = taxa
 			mydict['TAXAIsEmpty'] = False
 			typespec = TypeSpec.objects.get(taxa__Scientific_Name__iexact = category)
